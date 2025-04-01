@@ -1,0 +1,145 @@
+openapi: 3.0.0
+info:
+  title: Request API
+  description: API for handling requests in the system.
+  version: "1.0.0"
+paths:
+  /api/requests:
+    post:
+      summary: Create a new request
+      operationId: createRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestDto'
+      responses:
+        '200':
+          description: Request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestDto'
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /api/requests/:
+    post:
+      summary: List requests based on filters
+      operationId: listRequests
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestFilterDto'
+      responses:
+        '200':
+          description: List of requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestDto'
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /api/requests/{id}:
+    get:
+      summary: Get request by ID
+      operationId: getRequestById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Request found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestDto'
+        '404':
+          description: Request not found
+        '500':
+          description: Server error
+
+  /api/requests/export/csv:
+    post:
+      summary: Export requests as CSV
+      operationId: exportRequestsAsCSV
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestFilterDto'
+      responses:
+        '200':
+          description: CSV file containing the requests
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "id,brand,requestType,contactName,..."
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    RequestDto:
+      type: object
+      properties:
+        id:
+          type: string
+        brand:
+          type: string
+          maxLength: 50
+        requestType:
+          type: string
+          maxLength: 30
+        sentDate:
+          type: string
+          format: date
+        contactName:
+          type: string
+          maxLength: 22
+        contactNumber:
+          type: string
+          pattern: "^\d{9,15}$"
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactDto'
+    ContactDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          maxLength: 22
+        number:
+          type: string
+          pattern: "^\d{9,15}$"
+    RequestFilterDto:
+      type: object
+      properties:
+        requestType:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date

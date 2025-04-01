@@ -1,0 +1,34 @@
+brand:
+  notBlank: "Brand cannot be blank."
+  maxSize: "Brand must not exceed 50 characters."
+  onlyLetters: "Brand must contain only letters and spaces."
+
+requestType:
+  notBlank: "Request Type cannot be blank."
+  maxSize: "Request Type must not exceed 30 characters."
+  onlyLetters: "Request Type must contain only letters and spaces."
+
+sentDate:
+  notNull: "Sent Date cannot be null."
+
+contactName:
+  notBlank: "Contact Name cannot be blank."
+  maxSize: "Contact Name must not exceed 22 characters."
+  onlyLetters: "Contact Name must contain only letters and spaces."
+
+contactNumber:
+  notBlank: "Contact Number cannot be blank."
+  invalidFormat: "Contact Number must be a numeric value with 9 to 15 digits."
+
+contacts:
+  notEmpty: "Contacts list cannot be empty."
+
+contact:
+  name:
+    notBlank: "Contact Name cannot be blank."
+    maxSize: "Contact Name must not exceed 22 characters."
+    onlyLetters: "Contact Name must contain only letters and spaces."
+
+  number:
+    notBlank: "Contact Number cannot be blank."
+    invalidFormat: "Contact Number must be a numeric value with 9 to 15 digits."
