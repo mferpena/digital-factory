@@ -1,0 +1,12 @@
+student:
+  id:
+    notnull: "Student ID cannot be null"
+  firstname:
+    notnull: "Student first name cannot be null"
+  lastname:
+    notnull: "Student last name cannot be null"
+  status:
+    notnull: "Student status cannot be null"
+    invalid: "Status must be either ACTIVE or INACTIVE"
+  age:
+    min: "Age cannot be negative"
